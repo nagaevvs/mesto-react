@@ -39,7 +39,6 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setisEditAvatarPopupOpen(false);
     setisAddPlacePopupOpen(false);
-    setselectedCard(false);
     setIsClikedImage(false);
     setselectedCard({});
   }
