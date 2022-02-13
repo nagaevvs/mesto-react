@@ -4,6 +4,7 @@ import Footer from "./Footer";
 import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
+
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);
@@ -35,7 +36,6 @@ function App() {
   }
 
   function closeAllPopups() {
-    console.log("Скрой меня");
     setIsEditProfilePopupOpen(false);
     setisEditAvatarPopupOpen(false);
     setisAddPlacePopupOpen(false);
