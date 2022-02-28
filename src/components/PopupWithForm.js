@@ -1,4 +1,9 @@
 function PopupWithForm(props) {
+  const isLoading = props.isLoading;
+  const buttonText = isLoading
+    ? props.buttonTextLoadingTrue
+    : props.buttonTextLoadingFalse;
+
   return (
     <div
       id={`popup-user-${props.name}`}
@@ -15,7 +20,12 @@ function PopupWithForm(props) {
           onClick={props.onClose}
         />
         <h2 className="popup__title">{props.title}</h2>
-        <form className="popup__form" name={props.name} noValidate="">
+        <form
+          onSubmit={props.onSubmit}
+          className="popup__form"
+          name={props.name}
+          noValidate=""
+        >
           <fieldset className="popup__fieldset">
             {props.children}
             <button
@@ -23,7 +33,7 @@ function PopupWithForm(props) {
               className="popup__button"
               type="submit"
             >
-              Сохранить
+              {buttonText}
             </button>
           </fieldset>
         </form>
