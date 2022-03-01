@@ -1,20 +1,20 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
-function ConfirmPopup(props) {
+function ConfirmPopup({ onConfirm, card, isLoading, isOpen, onClose }) {
   function handleSubmit(e) {
     e.preventDefault();
-    props.onConfirm(props.card);
+    onConfirm(card);
   }
 
   return (
     <>
       <PopupWithForm
-        isLoading={props.isLoading}
+        isLoading={isLoading}
         title="Вы уверены?"
         name="form-confirm"
-        isOpen={props.isOpen}
-        onClose={props.onClose}
+        isOpen={isOpen}
+        onClose={onClose}
         onSubmit={handleSubmit}
         buttonTextLoadingTrue="Удаление..."
         buttonTextLoadingFalse="Да"

@@ -1,12 +1,20 @@
 import React from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-function Card(props) {
+function Card({
+  card,
+  onCardClick,
+  onCardLike,
+  onCardDelete,
+  link,
+  name,
+  likes,
+}) {
   //Пользовательские данные
   const currentUser = React.useContext(CurrentUserContext);
 
   // Определяем, являемся ли мы владельцем текущей карточки
-  const isOwn = props.card.owner._id === currentUser._id;
+  const isOwn = card.owner._id === currentUser._id;
 
   // Создаём переменную, которую после зададим в `className` для кнопки удаления
   const cardDeleteButtonClassName = `element__delete ${
@@ -14,7 +22,7 @@ function Card(props) {
   }`;
 
   // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
-  const isLiked = props.card.likes.some((i) => i._id === currentUser._id);
+  const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
   // Создаём переменную, которую после зададим в `className` для кнопки лайка
   const cardLikeButtonClassName = `element__like ${
@@ -22,15 +30,15 @@ function Card(props) {
   }`;
 
   function handleClick() {
-    props.onCardClick(props.card);
+    onCardClick(card);
   }
 
   function handleLikeClick() {
-    props.onCardLike(props.card);
+    onCardLike(card);
   }
 
   function handleDeleteClick() {
-    props.onCardDelete(props.card);
+    onCardDelete(card);
   }
 
   return (
@@ -44,20 +52,20 @@ function Card(props) {
       <div className="element__image-container">
         <img
           className="element__image"
-          src={props.link}
-          alt={props.name}
+          src={link}
+          alt={name}
           onClick={handleClick}
         />
       </div>
       <div className="element__description">
-        <h2 className="element__title">{props.name}</h2>
+        <h2 className="element__title">{name}</h2>
         <div className="element__like-container">
           <button
             className={cardLikeButtonClassName}
             onClick={handleLikeClick}
             type="button"
           />
-          <p className="element__counter">{props.likes}</p>
+          <p className="element__counter">{likes}</p>
         </div>
       </div>
     </div>

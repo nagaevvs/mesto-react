@@ -1,33 +1,40 @@
-function PopupWithForm(props) {
-  const isLoading = props.isLoading;
-  const buttonText = isLoading
-    ? props.buttonTextLoadingTrue
-    : props.buttonTextLoadingFalse;
+function PopupWithForm({
+  isLoading,
+  buttonTextLoadingTrue,
+  buttonTextLoadingFalse,
+  name,
+  isOpen,
+  onClose,
+  title,
+  onSubmit,
+  children,
+}) {
+  const buttonText = isLoading ? buttonTextLoadingTrue : buttonTextLoadingFalse;
 
   return (
     <div
-      id={`popup-user-${props.name}`}
+      id={`popup-user-${name}`}
       className={
-        props.isOpen
-          ? `popup popup_type_${props.name} popup_opened`
-          : `popup popup_type_${props.name}`
+        isOpen
+          ? `popup popup_type_${name} popup_opened`
+          : `popup popup_type_${name}`
       }
     >
       <div className="popup__container container">
         <button
           className="popup__button-close"
           type="button"
-          onClick={props.onClose}
+          onClick={onClose}
         />
-        <h2 className="popup__title">{props.title}</h2>
+        <h2 className="popup__title">{title}</h2>
         <form
-          onSubmit={props.onSubmit}
+          onSubmit={onSubmit}
           className="popup__form"
-          name={props.name}
+          name={name}
           noValidate=""
         >
           <fieldset className="popup__fieldset">
-            {props.children}
+            {children}
             <button
               id="edit-profile-button"
               className="popup__button"

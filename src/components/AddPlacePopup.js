@@ -1,43 +1,44 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
-function AddPlacePopup(props) {
-  const [name, setName] = React.useState();
-  const [link, setLink] = React.useState();
+function AddPlacePopup({ onAddPlace, isLoading, isOpen, onClose }) {
+  const [state, setState] = React.useState({ title: "", image: "" });
 
-  function handleAddName(e) {
-    setName(e.target.value);
-  }
-
-  function handleAddLink(e) {
-    setLink(e.target.value);
-  }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.onAddPlace({
-      name,
-      link,
+    onAddPlace({
+      name: state.title,
+      link: state.image,
     });
+    setState({ title: "", image: "" });
   }
 
   return (
     <PopupWithForm
-      isLoading={props.isLoading}
+      isLoading={isLoading}
       title="Новое место"
       name="formcard"
-      isOpen={props.isOpen}
-      onClose={props.onClose}
+      isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       buttonTextLoadingTrue="Сохранение..."
       buttonTextLoadingFalse="Создать"
     >
       <input
-        onChange={handleAddName}
+        onChange={handleChange}
         className="popup__input"
         id="title-input"
         type="text"
         name="title"
+        value={state.title}
         placeholder="Название"
         required=""
         minLength={2}
@@ -45,11 +46,12 @@ function AddPlacePopup(props) {
       />
       <span className="popup__error title-input-error" />
       <input
-        onChange={handleAddLink}
+        onChange={handleChange}
         className="popup__input"
         id="url-input"
         type="url"
         name="image"
+        value={state.image}
         placeholder="Ссылка на картинку"
         required=""
       />

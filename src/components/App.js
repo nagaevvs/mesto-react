@@ -16,12 +16,12 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);
-  const [isAddPlacePopupOpen, setisAddPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setisEditAvatarPopupOpen] =
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
     React.useState(false);
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = React.useState(false);
-  const [selectedCard, setselectedCard] = React.useState({});
-  const [isClikedImage, setIsClikedImage] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState({});
+  const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
 
   React.useEffect(() => {
     Promise.all([userApi.getUserData(), userApi.getInitialCards()])
@@ -115,7 +115,7 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    setselectedCard(card);
+    setSelectedCard(card);
     setIsConfirmPopupOpen(true);
   }
   function handleEditProfileClick(e) {
@@ -124,24 +124,24 @@ function App() {
   }
   function handleEditAvatarClick(e) {
     e.preventDefault();
-    setisEditAvatarPopupOpen(true);
+    setIsEditAvatarPopupOpen(true);
   }
   function handleAddPlaceClick(e) {
     e.preventDefault();
-    setisAddPlacePopupOpen(true);
+    setIsAddPlacePopupOpen(true);
   }
 
   function handleCardClick(card) {
-    setselectedCard(card);
-    setIsClikedImage(true);
+    setSelectedCard(card);
+    setIsImagePopupOpen(true);
   }
 
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
-    setisEditAvatarPopupOpen(false);
-    setisAddPlacePopupOpen(false);
-    setIsClikedImage(false);
-    setselectedCard({});
+    setIsEditAvatarPopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsImagePopupOpen(false);
+    setSelectedCard({});
     setIsConfirmPopupOpen(false);
   }
 
@@ -149,7 +149,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <ImagePopup
         card={selectedCard}
-        isCliked={isClikedImage}
+        isCliked={isImagePopupOpen}
         onClose={closeAllPopups}
       />
 
@@ -194,7 +194,6 @@ function App() {
           onCardDelete={handleCardDelete}
         />
         <Footer />
-        <template id="element" />
       </div>
     </CurrentUserContext.Provider>
   );
