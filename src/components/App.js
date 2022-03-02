@@ -12,7 +12,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
-  const [cards, setCards] = React.useState({});
+  const [cards, setCards] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);

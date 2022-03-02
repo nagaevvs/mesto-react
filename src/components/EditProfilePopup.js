@@ -16,11 +16,10 @@ function EditProfilePopup({ onUpdateUser, isLoading, isOpen, onClose }) {
 
   React.useEffect(() => {
     setState({ name: currentUser.name, description: currentUser.about });
-  }, [currentUser]);
+  }, [currentUser, isOpen]);
 
   function handleClosePopup() {
     onClose();
-    setState({ name: currentUser.name, description: currentUser.about });
   }
 
   function handleSubmit(e) {
@@ -48,7 +47,7 @@ function EditProfilePopup({ onUpdateUser, isLoading, isOpen, onClose }) {
         id="name-input"
         type="text"
         name="name"
-        value={state.name}
+        value={state.name || ""}
         required=""
         placeholder="Имя"
         minLength={2}
@@ -61,7 +60,7 @@ function EditProfilePopup({ onUpdateUser, isLoading, isOpen, onClose }) {
         id="job-input"
         type="text"
         name="description"
-        value={state.description}
+        value={state.description || ""}
         required=""
         placeholder="О себе"
         minLength={2}
